@@ -1,0 +1,98 @@
+{% extends "CDRProjetBundle::layout.html.twig" %}
+{% block projet_body %}
+    
+    <div class="well">
+         Vous êtes sur le point de clôturer le projet {{projet.nom}}. La clôture de ce projet implique la saisie des indicateurs DNR de celui-ci :<br> <br>
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+
+        <div class="form-group">
+            {# Génération du label. #}
+            {{ form_label(form.indic1_satisfactionClient, "Taux de satisfaction client (en %) : ", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            {# Affichage des erreurs pour ce champ précis. #}
+            {{ form_errors(form.indic1_satisfactionClient) }}        
+            {# Génération de l'input. #}
+            <div class="col-sm-6">
+                {{ form_widget(form.indic1_satisfactionClient) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {# Génération du label. #}
+            {{ form_label(form.indic2_ratioCharges, "Ratio des charges (en %) : ", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            {# Affichage des erreurs pour ce champ précis. #}
+            {{ form_errors(form.indic2_ratioCharges) }}
+            <div class="col-sm-6">
+                {# Génération de l'input. #}
+                {{ form_widget(form.indic2_ratioCharges, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {# Génération du label. #}
+            {{ form_label(form.indic3_tauxCouverture, "Taux de couverture des tests (en %) : ", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            {# Affichage des erreurs pour ce champ précis. #}
+            {{ form_errors(form.indic3_tauxCouverture) }}
+            <div class="col-sm-6">
+                {# Génération de l'input. #}
+                {{ form_widget(form.indic3_tauxCouverture, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {# Génération du label. #}
+            {{ form_label(form.indic4_tauxFSDeclassees, "Taux de FS déclassées (en %) : ", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            {# Affichage des erreurs pour ce champ précis. #}
+            {{ form_errors(form.indic4_tauxFSDeclassees) }}
+            <div class="col-sm-6">
+                {# Génération de l'input. #}
+                {{ form_widget(form.indic4_tauxFSDeclassees, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {# Génération du label. #}
+            {{ form_label(form.indic5_nombreTests, "Nombre de tests réalisés : ", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            {# Affichage des erreurs pour ce champ précis. #}
+            {{ form_errors(form.indic5_nombreTests) }}
+            <div class="col-sm-6">
+                {# Génération de l'input. #}
+                {{ form_widget(form.indic5_nombreTests, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            {# Génération du label. #}
+            {{ form_label(form.indic6_nombreRelivraisons, "Nombre de relivraisons : ", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+            {# Affichage des erreurs pour ce champ précis. #}
+            {{ form_errors(form.indic6_nombreRelivraisons) }}
+            <div class="col-sm-6">
+                {# Génération de l'input. #}
+                {{ form_widget(form.indic6_nombreRelivraisons, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+
+        {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+        <div style="text-align:center">
+            {{ form_widget(form.Enregistrer, {'attr': {'class': 'btn btn-dark'}}) }}
+        </div>
+
+        {{ form_rest(form) }}
+
+        {{ form_end(form) }}
+
+    </div>
+        
+        
+        
+    
+
+    
+
+{% endblock %}
+
+
+

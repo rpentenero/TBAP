@@ -1,0 +1,20 @@
+{% extends "CDRProjetBundle::layout.html.twig" %}
+{% block projet_body %}
+    <div class="well">
+            <form action="{{ path('cdr_projet_decloturer', {'id': projet.id}) }}" method="post">
+                {# Ici j'ai écrit le bouton de soumission à la main #}
+                Vous êtes sur le point de déclôturer le projet {{projet.nom}}. Cela va entrainer la réinitialisation des indicateurs DNR du projet. Voulez-vous réellement le déclôturer ? <br> <br>
+                <input type="submit" value="Déclôturer le projet" class="btn btn-dark" />
+                <a href="{{ path('cdr_projet_homepage') }}"> <button type="button" class="btn btn-dark">Revenir à la liste des projets </button> </a>
+                {# Ceci va générer le champ CSRF #}
+                {{ form_rest(form) }}
+            </form>
+    </div>
+
+    
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,51 @@
+cdr_projet_homepage:
+    path:      /
+    defaults: { _controller: CDRProjetBundle:Projet:lister }
+    
+cdr_projet_ajouter:
+    path:     /ajouter
+    defaults: { _controller: CDRProjetBundle:Projet:ajouter }
+    
+cdr_projet_supprimer:
+    path:     /supprimer/{id}
+    defaults: { _controller: CDRProjetBundle:Projet:supprimer }
+    requirements:
+        id: \d+
+        
+cdr_projet_consulter:
+    path:     /consulter/{id}
+    defaults: { _controller: CDRProjetBundle:Projet:consulter }
+    requirements:
+        id: \d+
+    
+cdr_projet_ajoutersuivi:
+    path:     /ajoutsuivi/{id}
+    defaults: { _controller: CDRProjetBundle:Projet:ajouterSuivi }
+    requirements:
+        id: \d+
+    
+cdr_projet_modifier:
+    path:     /modifier/{id}
+    defaults: { _controller: CDRProjetBundle:Projet:modifier }
+    requirements:
+        id: \d+
+        
+cdr_projet_cloturer:
+    path:     /cloturer/{id}
+    defaults: { _controller: CDRProjetBundle:Projet:cloturer }
+    requirements:
+        id: \d+
+
+cdr_projet_decloturer:
+    path:     /decloturer/{id}
+    defaults: { _controller: CDRProjetBundle:Projet:decloturer }
+    requirements:
+        id: \d+
+        
+cdr_projet_matrice:
+    path:     /matrice
+    defaults: { _controller: CDRProjetBundle:Projet:listerprojetsagents }
+    
+cdr_projet_planning:
+    path:     /planning
+    defaults: { _controller: CDRProjetBundle:Projet:planning }

@@ -1,0 +1,119 @@
+{% extends "CDRProjetBundle::layout.html.twig" %}
+{% block projet_body %}
+
+
+
+    {% for message in app.flashes ('notice') %}
+
+        <div class="flash">
+            {{ message }}
+        </div>
+
+    {% endfor %}
+
+    <div class="col-md-20">
+        <!-- Nav tabs --><div class="card">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
+                {% if projet.termine %}<li role="indics"><a href="#indics" aria-controls="profile" role="tab" data-toggle="tab">Indicateurs DNR</a></li>{% endif %} 
+                <li role="presentation"><a href="#suivis" aria-controls="messages" role="tab" data-toggle="tab">Tableau des suivis</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    Numéro de la LDR : {{ projet.numLDR }} <br>
+                    Libellé projet : {{ projet.nom }} <br>
+                    Etat du dossier : {%if projet.termine%} Terminé {%else%} En cours {%endif%} <br>
+                    Référent projet : {{ projet.Referent.PrenomEtNom }} <br>
+                    Agents : {%if projet.agent1 is not null %} {{projet.agent1.PrenomEtNom}}{%endif%}{%if projet.agent2 is not null %}, {{ projet.agent2.PrenomEtNom}}{%endif%}{%if projet.agent3 is not null %}, {{ projet.agent3.PrenomEtNom }}{%endif%}{%if projet.agent4 is not null %}, {{ projet.agent4.PrenomEtNom }}{%endif%}{%if projet.agent5 is not null %}, {{ projet.agent5.PrenomEtNom }}{%endif%}<br>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="indics">
+                    <div class="container">
+                        <div class="row">                   
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                    <span class="sr-only">60% Complete</span>
+                                </div>
+                                <span class="progress-type">HTML / HTML5</span>
+                                <span class="progress-completed">60%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                    <span class="sr-only">40% Complete (success)</span>
+                                </div>
+                                <span class="progress-type">ASP.Net</span>
+                                <span class="progress-completed">40%</span>
+                            </div>
+                            </div>
+</div>
+                            Taux de satisfaction client : <span name="poll_val">{{ projet.Indic1SatisfactionClient*100 }} % </span> <br>
+                            Ratio des charges de recette : {{ projet.Indic2RatioCharges*100 }} % <br>          
+                            Taux de couverture des tests : {{ projet.Indic3TauxCouverture*100 }} % <br>        
+                            Taux de FS déclassés : {{ projet.Indic4TauxFSDeclassees*100 }} % <br>
+                            Nombre de tests : {{ projet.Indic5NombreTests }} <br>
+                            Nombre de livraison(s) : {{ projet.Indic6NombreRelivraisons }} <br> <br>
+                        </div>                                        
+                        <div role="tabpanel" class="tab-pane" id="suivis">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center">Date</th>
+                                        <th style="text-align: center;">Méthode</th>
+                                        <th style="text-align: center;">Contenu</th>
+                                        <th style="text-align: center;">PJ</th>
+                                        <th style="text-align: center;">Action</th>
+                                    </tr>
+                                </thead>
+                                {% for suivi in suivis %}
+                                    <tr>
+                                        <td style="text-align: center;"> {{suivi.Date|date('Y-m-d') }} </td>
+                                        <td style="text-align: center;"> {{suivi.Moyen}} </td>
+                                        <td style="text-align: center;"> {{suivi.Contenu}} </td>
+                                        <td style="text-align: center;"> <a href="{{ asset('public/uploads/pj/' ~ suivi.fichier) }}">Fichier</a> </td>
+                                        <td style="text-align: center;"> 
+                                            <a href="{{ path('cdr_projet_supprimer', {'id': projet.id}) }}" class="btn btn-danger btn-xs" style="width: 24px; height: 22px;">
+                                                <i style="margin-top:25%;" class="glyphicon glyphicon-trash"></i>                                
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>                                    
+
+                    </div>
+                </div>
+                <br>
+                <a href="{{path('cdr_projet_ajoutersuivi',{'id': projet.id}) }}" class="btn btn-dark">
+                    <i class="glyphicon glyphicon-edit"></i>
+                    Ajouter un suivi de projet
+                </a>
+                <a href="{{path('cdr_projet_modifier',{'id': projet.id}) }}" class="btn btn-dark">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                    Modifier
+                </a>
+                {% if projet.termine%}
+                    <a href="{{path('cdr_projet_decloturer',{'id': projet.id}) }}" class="btn btn-dark">
+                        <i class="glyphicon glyphicon-wrench"></i>
+                        Déclôturer
+                    </a>
+                {%else%}
+                    <a href="{{path('cdr_projet_cloturer',{'id': projet.id}) }}" class="btn btn-dark">
+                        <i class="glyphicon glyphicon-lock"></i>
+                        Clôturer
+                    </a>
+                {%endif%}
+                <a href="{{ path('cdr_projet_homepage') }}" class="btn btn-dark">
+                    <i class="glyphicon glyphicon-chevron-left"></i>
+                    Revenir à la liste des projets
+                </a>
+
+
+            </div>
+
+
+            <br>
+
+           
+        {% endblock %}

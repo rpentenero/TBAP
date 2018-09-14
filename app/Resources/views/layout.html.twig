@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>TBAP</title>
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+            <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/css/bootstrap-datepicker.css">
+            <link rel="icon" type="image/png" href="{{ asset('img/favicon.PNG') }}" />
+            <script src="{{ asset('js/jquery.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.js') }}"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.0/js/bootstrap-datepicker.min.js"></script>
+        {% endblock %}
+    </head>
+
+    <body>
+        <div class="container">
+            <!-- Logo -->
+            <div class="row hidden-xs topper">
+                <div style="margin-left: 25%; margin-right: 25%;">
+                    <a href="{{ path('cdr_projet_planning') }}"><img am-TopLogo alt="logo"  src="{{ asset('img/TBAP_logo3.PNG') }}" class="img-responsive"></a>
+                </div>    
+            </div>
+            <br>    
+            <!-- Navigation -->
+            <div class="row">
+                <nav class="navbar navbar-inverse" role="navigation">
+                    <div class="container">
+
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse navbar-ex1-collapse" style="position:relative;">
+                            <ul class="nav navbar-nav js-nav-add-active-class">
+                                <li><a href="{{ path('cdr_projet_planning') }}"><i class="glyphicon glyphicon-calendar"></i> Planning</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-tasks"></i> Projets <b class="caret"></b></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ path('cdr_projet_homepage') }}"><i class="glyphicon glyphicon-th-list"></i> Liste des projets</a></li>
+                                        <li><a href="{{ path('cdr_projet_matrice')}}"><i class="glyphicon glyphicon-list-alt"></i> Matrice Projets-Agents</a></li>
+                                    </ul>
+                                </li>
+                                {% if is_granted('ROLE_ADMIN') %}
+
+                                    <li class="dropdown">
+                                        <a href="#"class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-lock"></i> Administration <b class="caret"></b></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i> Gestion des utilisateurs </a></li>
+                                        </ul>
+                                    </li> 
+                                {% endif %}                               
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right hidden-xs">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> {{ app.user.prenom  }} {{ app.user.nom  }} <b class="caret"></b></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ path('cdr_projet_homepage') }}"> <i class="glyphicon glyphicon-user"></i> Modifier mon profil</a></li>
+                                        <li><a href="{{ path('fos_user_security_logout') }}"> <i class="glyphicon glyphicon-off"></i> Déconnexion</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <br>
+            <div id="content" class="col-md-9">
+                {% block body %}
+                    <br>
+                {% endblock %}
+
+            </div>
+            <br>
+
+        </div>
+
+
+    </body>
+</html>

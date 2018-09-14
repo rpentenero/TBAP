@@ -1,0 +1,18 @@
+{% extends "CDRProjetBundle::layout.html.twig" %}
+{% block projet_body %}
+    <div class="well">
+            <form action="{{ path('cdr_projet_supprimer', {'id': projet.id}) }}" method="post">
+                {# Ici j'ai écrit le bouton de soumission à la main #}
+                Vous êtes sur le point de supprimer le projet {{projet.nom}}. Voulez-vous réellement le supprimer ? <br> <br>
+                <input type="submit" value="Supprimer" class="btn btn-danger" />
+                <a href="{{ path('cdr_projet_homepage') }}"> <button type="button" class="btn btn-dark">Revenir à la liste des projets </button> </a>
+                {# Ceci va générer le champ CSRF #}
+                {{ form_rest(form) }}
+            </form>
+    </div>
+
+    
+
+{% endblock %}
+
+

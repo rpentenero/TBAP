@@ -1,0 +1,94 @@
+{% extends "CDRProjetBundle::layout.html.twig" %}
+{% block projet_body %}
+
+    <br>
+    <table class="table table-bordered table-hover table-sortable">
+        <thead>
+            <tr>
+                <th style="text-align: center"> </th>
+                    {% for agent in agents %}                
+                    <th style="text-align: center; font-size:70%; vertical-align: middle;">{{agent.prenom}} {{agent.nom}} </th>
+                    {% endfor %}
+            </tr>
+        </thead>
+        {% for projet in projets %}
+            <!-- Si le projet est terminé, on le met en fond gris -->
+            {% if projet.termine %}
+                <tr bgcolor="#ebebe0">
+            {%else %}
+                <tr bgcolor="#e6ffcc">
+            {%endif%}
+                
+            <td style="text-align: center; font-size:75%;"> <a href="{{path('cdr_projet_consulter', {'id': projet.id})}} ">{{ projet.nom }} </a> </td> 
+
+                {% for agent in agents %}
+
+                    {% if (projet.agent1 is not null) and (projet.agent2 is not null) and (projet.agent3 is not null) and (projet.agent4 is not null) and (projet.agent5 is not null) %}
+                        {%if  (agent.id == projet.referent.id) or (agent.id == projet.agent1.id) or (agent.id == projet.agent2.id) or (agent.id == projet.agent3.id) or (agent.id == projet.agent4.id)or (agent.id == projet.agent5.id)%}
+                            {% if (agent.id == projet.referent.id) %}
+                                <td style="text-align: center;"> <b> X (R) </b> </td>
+                            {%else%}
+                                <td style="text-align: center;"> X </td>
+                            {% endif %}  
+                        {% else %}
+                            <td style="text-align: center;"></td>
+                        {% endif %}
+
+                    {% elseif (projet.agent1 is not null) and (projet.agent2 is not null) and (projet.agent3 is not null) and (projet.agent4 is not null) %}
+                        {%if  (agent.id == projet.referent.id) or (agent.id == projet.agent1.id) or (agent.id == projet.agent2.id) or (agent.id == projet.agent3.id) or (agent.id == projet.agent4.id)%}
+                            {% if (agent.id == projet.referent.id) %}
+                                <td style="text-align: center;"> <b> X (R) </b> </td>
+                            {%else%}
+                                <td style="text-align: center;"> X </td>
+                            {% endif %}  
+                        {% else %}
+                            <td style="text-align: center;"></td>
+                        {% endif %}
+
+                    {% elseif (projet.agent1 is not null) and (projet.agent2 is not null) and (projet.agent3 is not null)%}
+                        {%if  (agent.id == projet.referent.id) or (agent.id == projet.agent1.id) or (agent.id == projet.agent2.id) or (agent.id == projet.agent3.id) %}
+                            {% if (agent.id == projet.referent.id) %}
+                                <td style="text-align: center;"> <b> X (R) </b> </td>
+                            {%else%}
+                                <td style="text-align: center;"> X </td>
+                            {% endif %}
+                        {% else %}
+                            <td style="text-align: center;"></td>
+                        {% endif %}
+
+                    {% elseif (projet.agent1 is not null) and (projet.agent2 is not null) %}
+                        {%if  (agent.id == projet.referent.id) or (agent.id == projet.agent1.id) or (agent.id == projet.agent2.id) %}
+                            {% if (agent.id == projet.referent.id) %}
+                                <td style="text-align: center;"> <b> X (R) </b> </td>
+                            {%else%}
+                                <td style="text-align: center;"> X </td>
+                            {% endif %}
+                        {% else %}
+                            <td style="text-align: center;"></td>
+                        {% endif %}
+
+                    {%elseif (projet.agent1 is not null)  %}
+                        {%if  (agent.id == projet.referent.id) or (agent.id == projet.agent1.id) %}
+                            {% if (agent.id == projet.referent.id) %}
+                                <td style="text-align: center;"> <b> X (R) </b> </td>
+                            {%else%}
+                                <td style="text-align: center;"> X </td>
+                            {% endif %}    
+                        {% else %}
+                            <td style="text-align: center;"></td>
+                        {% endif %}
+
+                    {%elseif (projet.agent1 is null)  %}
+                        {% if (agent.id == projet.referent.id) %}
+                            <td style="text-align: center;"> <b> X (R) </b> </td>
+                        {% else %}
+                            <td style="text-align: center;"></td>
+                        {% endif %}
+                    {% endif %}    
+
+                {% endfor %}
+            </tr>
+
+        {% endfor %}
+    </table>
+{% endblock %}
