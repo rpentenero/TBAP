@@ -23,7 +23,7 @@ class ProjetController extends Controller {
     }
 
     public function ajouterAction(Request $request) {
-
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Vous ne pouvez pas accéder à cette page.');
         $projet = new Projet();
         $projet->setTermine(false);
         $form = $this->get('form.factory')->create(ProjetType::class, $projet);
@@ -41,6 +41,7 @@ class ProjetController extends Controller {
     }
 
     public function supprimerAction(Request $request, $id) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Vous ne pouvez pas accéder à cette page.');
         $em = $this->getDoctrine()->getManager();
         $projet = $em->getRepository("CDRProjetBundle:Projet")->find($id);
         if (null === $projet) {
@@ -110,6 +111,7 @@ class ProjetController extends Controller {
     }
 
     public function cloturerAction(Request $request, $id) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Vous ne pouvez pas accéder à cette page.');
         $em = $this->getDoctrine()->getManager();
         $projet = $em->getRepository("CDRProjetBundle:Projet")->find($id);
         if (null === $projet) {
@@ -135,6 +137,7 @@ class ProjetController extends Controller {
     }
 
     public function decloturerAction(Request $request, $id) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Vous ne pouvez pas accéder à cette page.');
         $em = $this->getDoctrine()->getManager();
         $projet = $em->getRepository("CDRProjetBundle:Projet")->find($id);
         if (null === $projet) {

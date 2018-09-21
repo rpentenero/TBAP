@@ -12,12 +12,13 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/TBAP/src/CDR/ProjetBundle/Resources/views/Projet/ajouter.html.twig</file>
-            <file>file:/C:/wamp64/www/TBAP/src/CDR/ProjetBundle/Form/ProjetType.php</file>
+            <file>file:/C:/wamp64/www/TBAP/src/CDR/UserBundle/Resources/views/layout.html.twig</file>
+            <file>file:/C:/wamp64/www/TBAP/src/CDR/UserBundle/Resources/views/Security/login.html.twig</file>
             <file>file:/C:/wamp64/www/TBAP/src/CDR/ProjetBundle/Controller/ProjetController.php</file>
-            <file>file:/C:/wamp64/www/TBAP/src/CDR/ProjetBundle/Entity/Projet.php</file>
+            <file>file:/C:/wamp64/www/TBAP/src/CDR/ProjetBundle/Resources/views/Projet/listerprojetsagents.html.twig</file>
             <file>file:/C:/wamp64/www/TBAP/src/CDR/ProjetBundle/Resources/views/Projet/consulter.html.twig</file>
             <file>file:/C:/wamp64/www/TBAP/src/CDR/ProjetBundle/Resources/views/Projet/lister.html.twig</file>
+            <file>file:/C:/wamp64/www/TBAP/app/config/security.yml</file>
         </group>
     </open-files>
 </project-private>

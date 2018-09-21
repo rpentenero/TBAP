@@ -31,5 +31,6 @@ security:
         secret:     %secret%
       
   access_control:
-    - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+      # Redirection d'un utilisateur non-connecté vers la page de connection
+    - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY } 
     - { path: ^/, role: ROLE_USER }
