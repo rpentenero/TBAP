@@ -57,7 +57,7 @@ class Suivi {
     
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\File(mimeTypes={ "application/pdf" })
+     * @Assert\File(mimeTypes={ "application/pdf", "application/txt", "application/msg" })
      */
     private $fichier;
 

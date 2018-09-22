@@ -178,10 +178,10 @@ class ProjetController extends Controller {
                 $this->getParameter('pj_directory'),
                 $fileName
             );
+            
             $suivi->setFichier($fileName);
             $em->persist($suivi);
             $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Le suivi a bien été ajoutée au projet.');
             return $this->redirectToRoute('cdr_projet_consulter', ['id' => $projet->getId()]);
         }
 
