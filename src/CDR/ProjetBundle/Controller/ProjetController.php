@@ -82,6 +82,8 @@ class ProjetController extends Controller {
     }
 
     public function modifierAction($id, Request $request) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Vous ne pouvez pas accéder à cette page.');
+
         $em = $this->getDoctrine()->getManager();
         $projet = $em->getRepository('CDRProjetBundle:Projet')->find($id);
         if (null === $projet) {
@@ -111,6 +113,8 @@ class ProjetController extends Controller {
     }
 
     public function cloturerAction(Request $request, $id) {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Vous ne pouvez pas accéder à cette page.');
+
         $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Vous ne pouvez pas accéder à cette page.');
         $em = $this->getDoctrine()->getManager();
         $projet = $em->getRepository("CDRProjetBundle:Projet")->find($id);
@@ -165,6 +169,8 @@ class ProjetController extends Controller {
     }
 
     public function ajouterSuiviAction(Request $request, $id) {
+        $this->denyAccessUnlessGranted('ROLE_REFERENT', 'Vous ne pouvez pas accéder à cette page.');
+
         $suivi = new Suivi();
         $em = $this->getDoctrine()->getManager();
         $projet = $em->getRepository("CDRProjetBundle:Projet")->find($id);
@@ -191,6 +197,7 @@ class ProjetController extends Controller {
     }
 
     public function supprimerSuiviAction(Request $request, $idSuivi, $idProjet = 'a') {
+        $this->denyAccessUnlessGranted('ROLE_REFERENT', 'Vous ne pouvez pas accéder à cette page.');
         $em = $this->getDoctrine()->getManager();
         $suivi = $em->getRepository("CDRProjetBundle:Suivi")->find($idSuivi);
         $projet = $em->getRepository("CDRProjetBundle:Projet")->find($idProjet);
