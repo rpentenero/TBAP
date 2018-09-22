@@ -1,7 +1,8 @@
 {% extends "CDRProjetBundle::layout.html.twig" %}
 {% block projet_body %}
+    <input type=checkbox name=caseACocher id="caseACocher"/> Masquer les projets terminés
+    <br> <br>
 
-    <br>
     <table class="table table-bordered table-hover table-sortable">
         <thead>
             <tr>
@@ -14,12 +15,12 @@
         {% for projet in projets %}
             <!-- Si le projet est terminé, on le met en fond gris -->
             {% if projet.termine %}
-                <tr bgcolor="#ebebe0">
-            {%else %}
-                <tr bgcolor="#e6ffcc">
-            {%endif%}
-                
-            <td style="text-align: center; font-size:75%;"> <a href="{{path('cdr_projet_consulter', {'id': projet.id})}} ">{{ projet.nom }} </a> </td> 
+                <tr class="projetter" bgcolor="#ebebe0">
+                {%else %}
+                <tr bgcolor="#ffffff">
+                {%endif%}
+
+                <td style="text-align: center; font-size:75%;"> <a href="{{path('cdr_projet_consulter', {'id': projet.id})}} ">{{ projet.nom }} </a> </td> 
 
                 {% for agent in agents %}
 
@@ -91,4 +92,15 @@
 
         {% endfor %}
     </table>
+
+    <script>
+        $(function () {
+            $('#caseACocher').change(function () {
+                if (this.checked)
+                    $('.projetter').hide();
+                else
+                    $('.projetter').show();
+            }).change();
+        });
+    </script>
 {% endblock %}
