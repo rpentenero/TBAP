@@ -190,15 +190,17 @@ class ProjetController extends Controller {
         ));
     }
 
-    public function supprimerSuiviAction(Request $request, $idSuivi) {
+    public function supprimerSuiviAction(Request $request, $idSuivi, $idProjet = 'a') {
         $em = $this->getDoctrine()->getManager();
         $suivi = $em->getRepository("CDRProjetBundle:Suivi")->find($idSuivi);
+        $projet = $em->getRepository("CDRProjetBundle:Projet")->find($idProjet);
+
         if (null === $suivi) {
             throw new NotFoundHttpException("Le suivi d'id " . $idSuivi . " n'existe pas.");
         }
         $em->remove($suivi);
         $em->flush();
-        return $this->redirectToRoute('cdr_projet_homepage');
+        return $this->redirectToRoute('cdr_projet_consulter', ['id' => $projet->getId()]);
     }
 
     public function planningAction() {

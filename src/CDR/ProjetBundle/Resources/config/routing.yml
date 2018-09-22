@@ -25,10 +25,11 @@ cdr_projet_ajoutersuivi:
         id: \d+
 
 cdr_projet_supprimersuivi:
-    path:     /supprimersuivi/{idSuivi}
+    path:     /supprimersuivi/{idSuivi}/{idProjet}
     defaults: { _controller: CDRProjetBundle:Projet:supprimerSuivi }
     requirements:
         idSuivi: \d+
+        idProjet: \d+
 
 
     
