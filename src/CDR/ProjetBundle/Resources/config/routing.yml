@@ -23,6 +23,14 @@ cdr_projet_ajoutersuivi:
     defaults: { _controller: CDRProjetBundle:Projet:ajouterSuivi }
     requirements:
         id: \d+
+
+cdr_projet_supprimersuivi:
+    path:     /supprimersuivi/{idSuivi}
+    defaults: { _controller: CDRProjetBundle:Projet:supprimerSuivi }
+    requirements:
+        idSuivi: \d+
+
+
     
 cdr_projet_modifier:
     path:     /modifier/{id}

@@ -72,7 +72,7 @@
                                         <td style="text-align: center;"> {{suivi.Contenu}} </td>
                                         <td style="text-align: center;"> <a href="{{ asset('public/uploads/pj/' ~ suivi.fichier) }}">Fichier</a> </td>
                                         <td style="text-align: center;"> 
-                                            <a href="{{ path('cdr_projet_supprimer', {'id': projet.id}) }}" class="btn btn-danger btn-xs" style="width: 24px; height: 22px;">
+                                            <a href="{{ path('cdr_projet_supprimersuivi', {'idSuivi': suivi.id }) }}" onclick="return confirm('Voulez-vous réellement supprimer ce suivi ?')" class="btn btn-danger btn-xs" style="width: 24px; height: 22px;">
                                                 <i style="margin-top:25%;" class="glyphicon glyphicon-trash"></i>                                
                                             </a>
 
