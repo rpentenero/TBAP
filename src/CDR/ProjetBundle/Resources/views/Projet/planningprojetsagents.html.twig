@@ -1,8 +1,41 @@
 {% extends "CDRProjetBundle::layout.html.twig" %}
-  {% block projet_body %}
-<h2> Planning CDR PA Refait </h2> 
-    
-<br>
+{% block projet_body %}
+{% set day = "now"|date('d') %}
+{% set weekEnd = "now"|date_modify("+#{6-day} days")|date('m-d-Y') %}
+
+
+
+    <br>
+    <table class="table table-bordered table-hover table-sortable">
+        <thead>
+            <tr>
+                <th colspan="6" style="text-align: center; font-size:70%; vertical-align: middle; column-width:100%;">Semaine du au  </th>
+            </tr>
+            <tr>
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:25%;">  </th>    
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:10%;"> Lundi {{day -2}} </th>                
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:10%;"> Mardi </th>
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:10%;"> Mercredi </th>
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:10%;"> Jeudi </th>
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:10%;"> Vendredi </th>
+            </tr>    
+        </thead>
+        <tbody>
+            {% for agent in agents %}
+                <tr>
+                    <td> {{agent.prenom}} {{agent.nom}} </td>
+                    <td> {{weekEnd}} </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                <tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+            
+ 
 {% endblock %}
 
 
