@@ -1,30 +1,49 @@
 {% extends "CDRProjetBundle::layout.html.twig" %}
 {% block projet_body %}
-{% set day = "now"|date('d') %}
-{% set weekEnd = "now"|date_modify("+#{6-day} days")|date('m-d-Y') %}
-
-
+{% set numerojour = "now"|date('w') %}
+{% set dateDebSemaine = "now"|date_modify("-" ~ numerojour ~ " day")|date_modify('+1 days') %}
+{% set dateFinSemaine = "now"|date_modify("-" ~ numerojour ~ " day")|date_modify('+5 days') %}
+<script>
+var date = new Date();
+var dateDebS =  new Date(date.setDate(date.getDate()-date.getDay()+1)).toLocaleDateString();
+var dateFinS =  new Date(date.setDate(date.getDate()-date.getDay()+5)).toLocaleDateString();
+var dateDebS2 =  new Date(date.setDate(date.getDate()-date.getDay()+8)).toLocaleDateString();
+var dateFinS2 =  new Date(date.setDate(date.getDate()-date.getDay()+5)).toLocaleDateString();
+</script>
 
     <br>
     <table class="table table-bordered table-hover table-sortable">
         <thead>
             <tr>
-                <th colspan="6" style="text-align: center; font-size:70%; vertical-align: middle; column-width:100%;">Semaine du au  </th>
-            </tr>
+                <!-- <th colspan="6" style="text-align: center; font-size:70%; vertical-align: middle; column-width:100%;"> <a onclick="afficherSemainePrec"> <i class="glyphicon glyphicon-chevron-left"></i></a>  Semaine du {{dateDebSemaine|date('d/m/Y')}} au {{dateFinSemaine|date('d/m/Y')}} <a href="#"> <i class="glyphicon glyphicon-chevron-right"></i></a> </th> -->
+                                                               <th> </th>
+                                                               <th colspan="5" style="text-align: center; font-size:70%; vertical-align: middle; column-width:100%;">  Semaine du <script> document.write(dateDebS) </script> au <script> document.write(dateFinS) </script> </th>
+                                                               <th colspan="5" style="text-align: center; font-size:70%; vertical-align: middle; column-width:100%;">  Semaine du <script> document.write(dateDebS2) </script> au <script> document.write(dateFinS2) </script> </th>
+                                               </tr>
             <tr>
                 <th style="text-align: center; font-size:70%; vertical-align: middle; width:25%;">  </th>    
-                <th style="text-align: center; font-size:70%; vertical-align: middle; width:10%;"> Lundi {{day -2}} </th>                
-                <th style="text-align: center; font-size:70%; vertical-align: middle; width:10%;"> Mardi </th>
-                <th style="text-align: center; font-size:70%; vertical-align: middle; width:10%;"> Mercredi </th>
-                <th style="text-align: center; font-size:70%; vertical-align: middle; width:10%;"> Jeudi </th>
-                <th style="text-align: center; font-size:70%; vertical-align: middle; width:10%;"> Vendredi </th>
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Lundi </th>                
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Mardi  </th>
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Mercredi  </th>
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Jeudi </th>
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Vendredi  </th>
+                                                               <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Lundi </th>                
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Mardi  </th>
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Mercredi  </th>
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Jeudi </th>
+                <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Vendredi  </th>
             </tr>    
         </thead>
         <tbody>
             {% for agent in agents %}
                 <tr>
                     <td> {{agent.prenom}} {{agent.nom}} </td>
-                    <td> {{weekEnd}} </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                    <td> </td>
+                                                                              <td> </td>
                     <td> </td>
                     <td> </td>
                     <td> </td>
@@ -32,11 +51,16 @@
                 <tr>
             {% endfor %}
         </tbody>
-
     </table>
             
- 
+                                               <script>
+                                               function afficherSemainePrec(){
+                                               dateDebS = new Date();
+                                               dateFinS = new Date();
+                                               }
+                                               function afficherSemaineSuiv(){
+                                               dateDebS.setDate(dateDebS.getDate()+7);
+                                               dateFinS.setDate(dateFinS.getDate()+7);
+                                               }                                             
+                                               </script>
 {% endblock %}
-
-
-
