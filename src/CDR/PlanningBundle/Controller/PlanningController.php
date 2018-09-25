@@ -8,7 +8,13 @@ class PlanningController extends Controller {
     
     public function afficherAction() {
        
-        return $this->render('CDRPlanningBundle:Planning:afficher.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $projets = $em->getRepository("CDRProjetBundle:Projet")->findAll();
+        $agents = $em->getRepository("CDRUserBundle:User")->findAll();
+        return $this->render('CDRProjetBundle:Projet:planningprojetsagents.html.twig', array(
+                    'projets' => $projets,
+                    'agents' => $agents
+        ));
     }
     
    
