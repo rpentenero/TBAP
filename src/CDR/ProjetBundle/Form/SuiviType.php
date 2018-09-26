@@ -27,7 +27,11 @@ class SuiviType extends AbstractType{
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('Date', DateType::class)
+                ->add('Date', DateType::class, array(
+    'widget' => 'single_text',
+    'html5' => false,
+    'attr' => ['class' => 'js-datepicker'],
+))
                 ->add('Moyen', ChoiceType::class, array('choices'  => array(
         'Téléphone' => "Téléphone",
         'Email' => "Email",

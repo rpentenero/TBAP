@@ -25,7 +25,9 @@ class ProjetSaisieIndicsType extends AbstractType {
     'attr' => array(
         'min' => 0,
         'max' => 100,
-        'onchange'=> "updateTextInput(this.value);"
+		'id'  => 'ageInputId',
+		'value' => '24',
+		'oninput' => "ageOutputId.value = ageInputId.value",
     )
 ))
                 ->add('indic2_ratioCharges', PercentType::class)

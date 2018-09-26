@@ -16,7 +16,9 @@
             {# Génération de l'input. #}
             <div class="col-sm-6">
                 {{ form_widget(form.indic1_satisfactionClient) }}
+				<output name="ageOutputName" id="ageOutputId">50</output>
             </div>
+			
         </div>
 
         <div class="form-group">
@@ -85,18 +87,8 @@
         {{ form_end(form) }}
 
     </div>
-        
-        
-        <script>  
-            function updateTextInput(val) {
-          document.getElementById('textInput').value=val; 
-        }
-            </script>
-            
-    
-
-    
-
+          
+		
 {% endblock %}
 
 

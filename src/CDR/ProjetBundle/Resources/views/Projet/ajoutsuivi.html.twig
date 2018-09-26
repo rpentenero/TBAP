@@ -1,10 +1,16 @@
 {% extends "CDRProjetBundle::layout.html.twig" %}
+
 {% block projet_body %}
 <script>
-        jQuery(document).ready(function() {
-            $('.js-datepicker').datepicker();
+        $(document).ready(function(){
+
+        $('.js-datepicker').datepicker({
+            format: 'mm/dd/yyyy',
+            todayHighlight: true,
         });
-    </script>
+    });
+</script>
+
     <div class="well">
 
         {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}

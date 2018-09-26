@@ -7,11 +7,15 @@
 
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('css/dataTables.min.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/datePicker.css') }}">
 			<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+			<link rel="stylesheet" href="{{ asset('css/bootstrap-slider.min.css') }}">
             <link rel="icon" type="image/png" href="{{ asset('img/favicon.PNG') }}" />			
             <script src="{{ asset('js/jquery.js') }}"></script>
 			<script src="{{ asset('js/jquery.min.js') }}"></script>
 			<script src="{{ asset('js/dataTables.js') }}"></script>
+			<script src="{{ asset('js/datePicker.js') }}"></script>
+			<script src="{{ asset('js/bootstrap-slider.min.js') }}"></script>
             <script src="{{ asset('js/bootstrap.js') }}"></script>
         {% endblock %}
     </head>
@@ -36,6 +40,17 @@
                             <ul class="nav navbar-nav js-nav-add-active-class">
                                 <li><a href="{{ path('cdr_projet_planning') }}"><i class="glyphicon glyphicon-calendar"></i> Planning</a></li>
                                 <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-link"></i> Liens <b class="caret"></b></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li> <a href="http://55.129.0.152:82/modintrachronotique/login.jsp" target="_blank"> Chronogestor </a></li>
+                                        <li> <a href="http://hpalmqc.cnamts.fr/qcbin/start_a.jsp" target="_blank"> HP ALM </a></li>
+										<li> <a href="http://cqweb.cnqd.cnamts.fr/cqweb/" target="_blank"> ClearQuest </a></li>
+										<li> <a href="http://wss-intranet.cnamts.fr/sites/DDFC/DC2R/RECETTE/Default.aspx" target="_blank"> SharePoint </a></li>
+										<li> <a href="http://pilotage.recette.cnamts.fr/" target="_blank">OPERA </a></li>
+										<li> <a href="http://activites.recette.cnamts.fr/" target="_blank"> TITUS </a></li>
+                                    </ul>
+                                </li>
+								<li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-tasks"></i> Projets <b class="caret"></b></a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="{{ path('cdr_projet_homepage') }}"><i class="glyphicon glyphicon-th-list"></i> Liste des projets</a></li>
@@ -43,7 +58,6 @@
                                     </ul>
                                 </li>
                                 {% if is_granted('ROLE_ADMIN') %}
-
                                     <li class="dropdown">
                                         <a href="#"class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-lock"></i> Administration <b class="caret"></b></a>
                                         <ul class="dropdown-menu" role="menu">
