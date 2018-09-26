@@ -8,10 +8,10 @@
 
 {% endfor %}
 
-<br>
-    {% if is_granted('ROLE_ADMIN') %} <a href="{{ path('cdr_projet_ajouter') }}"> <button type="button" class="btn btn-dark">Ajouter un projet </button> </a> {% endif %} <br>
+{% if is_granted('ROLE_ADMIN') %} <a href="{{ path('cdr_projet_ajouter') }}"> <button type="button" class="btn btn-dark">Ajouter un projet </button> </a> {% endif %}
+<button  id="caseACocher" class="btn btn-dark"> Masquer les projets terminés </button>
 <br>    
-
+<br> 
     <table class="table" id="dtBasicExample">
         <thead>
             <tr>
@@ -25,7 +25,7 @@
         </thead>
         <tbody>
             {% for projet in projets %}
-                <tr>
+                {% if projet.termine %} <tr class="projetter"> {% else %} <tr class="projet"> {% endif %}
                     <td style="text-align: center;"> {{ projet.numLdr }} </td>
                     <td style="text-align: center;"> {{ projet.nom }} </td>
                     <td style="text-align: center;">
@@ -65,8 +65,18 @@
     } );
   $('.dataTables_length').addClass('bs-select');
 });
-
 	</script>
+	
+	<script>
+        $(function () {
+            $('#caseACocher').change(function () {
+                if (this.checked)
+                    $('.projetter').hide();
+                else
+                    $('.projetter').show();
+            }).change();
+        });
+    </script>
 
 {% endblock %}
 

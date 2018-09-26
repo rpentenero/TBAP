@@ -1,6 +1,6 @@
 {% extends "CDRProjetBundle::layout.html.twig" %}
 {% block projet_body %}
-    <input type=checkbox name=caseACocher id="caseACocher"/> Masquer les projets terminés
+    <button  id="caseACocher" class="btn btn-dark"> Masquer les projets terminés </button>
     <br> <br>
 
     <table class="table table-bordered table-hover table-sortable">
@@ -20,7 +20,7 @@
                 <tr bgcolor="#ffffff">
                 {%endif%}
 
-                <td style="text-align: center; font-size:75%;"> <a href="{{path('cdr_projet_consulter', {'id': projet.id})}} ">{{ projet.nom }} </a> </td> 
+                <td style="text-align: center; font-size:75%; "> <a href="{{path('cdr_projet_consulter', {'id': projet.id})}} "> {{ projet.numLDR }} {{ projet.nom }} </a> </td> 
 
                 {% for agent in agents %}
 

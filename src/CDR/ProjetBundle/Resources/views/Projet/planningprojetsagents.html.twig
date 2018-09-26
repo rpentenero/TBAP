@@ -12,7 +12,7 @@ var dateFinS2 =  new Date(date.setDate(date.getDate()-date.getDay()+5)).toLocale
 </script>
 
     <br>
-    <table class="table table-bordered table-hover table-sortable">
+    <table class="table table-bordered table-hover table-sortable" id="planning">
         <thead>
             <tr>
                 <!-- <th colspan="6" style="text-align: center; font-size:70%; vertical-align: middle; column-width:100%;"> <a onclick="afficherSemainePrec"> <i class="glyphicon glyphicon-chevron-left"></i></a>  Semaine du {{dateDebSemaine|date('d/m/Y')}} au {{dateFinSemaine|date('d/m/Y')}} <a href="#"> <i class="glyphicon glyphicon-chevron-right"></i></a> </th> -->
@@ -27,7 +27,7 @@ var dateFinS2 =  new Date(date.setDate(date.getDate()-date.getDay()+5)).toLocale
                 <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Mercredi  </th>
                 <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Jeudi </th>
                 <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Vendredi  </th>
-                                                               <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Lundi </th>                
+				<th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Lundi </th>                
                 <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Mardi  </th>
                 <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Mercredi  </th>
                 <th style="text-align: center; font-size:70%; vertical-align: middle; width:5%;"> Jeudi </th>
@@ -52,15 +52,88 @@ var dateFinS2 =  new Date(date.setDate(date.getDate()-date.getDay()+5)).toLocale
             {% endfor %}
         </tbody>
     </table>
+
+<script>
+$(document).on('click', "#planning>tbody>tr td", function (e) {			
+                alert("toto");
+				$("#dialog-form-activite").dialog("open");
+        });
+</script>	
+<div id="dialog-form-activite" title="Ajouter une activité" style='display:none'>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="liste_domaine" class="col-sm-4 control-label">Domaine</label>
+                        <div class="col-sm-8">
+                            <select id="liste_domaine" name="liste_domaine" class="form-control">
+                            </select>
+                        </div><p id='idMsgDailogBox' style='text-align:right;color:red'></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="liste_activite_nat" class="col-sm-4 control-label">Activité Nationale</label>
+                        <div class="col-sm-8">
+                            <select id='liste_activite_nat' name='liste_activite_nat' class="form-control"></select>
+                        </div>
+                    </div>					
+                    <div class="form-group">
+                        <label for="liste_activite" class="col-sm-4 control-label">Activité Locale</label>
+                        <div class="col-sm-8">
+                            <select id='liste_activite' name='liste_activite' class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="tr_projet">
+                        <label for="liste_projet" class="col-sm-4 control-label">Dossier</label>
+                        <div class="col-sm-8">
+                            <select name='liste_projet' id='liste_projet' class="form-control"></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="form-horizontal" role="form">
+                    <div class="form-group" id="date_debut_periode">
+                        <label for="datepicker1" class="col-sm-3 control-label">Date</label>
+                        <div class="col-sm-3">
+                            <input placeholder="jj-mm-aaaa" type='text' name='datepicker1' id='datepicker1' class='form-control'>
+                        </div>
+                        <label for="datepicker2" class="col-sm-3 control-label date_fin_periode"> au </label>
+                        <div class="col-sm-3 date_fin_periode">
+                            <input placeholder="jj-mm-aaaa" type='text' name='datepicker2' id='datepicker2' class='form-control'>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input_time" class="col-sm-3 control-label">Durée</label>
+                        <div class="col-sm-3">
+                            <input placeholder="hh:mm" class="form-control" type="text" id="input_time"
+                                   name='input_time' value=""/>
+                            <div style="margin-top: 3px;" name="slider_time" id='slider_time'></div>
+                        </div>
+                        <label for="input_time" class="col-sm-3 control-label">Total jour</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" type="text" id="input_total_time" name='input_total_time'
+                                   value="" readonly=readonly size=4/>
+                            <input type="hidden" id="hidden_total_time" name='hidden_total_time' value=0/>
+                            <input type="hidden" id="hidden_duree_activite" name='hidden_duree_activite' value=0/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="commentaire_agent" class="col-sm-3 control-label">Commentaire</label>
+                        <div class="col-sm-9">
+                            <div id='msg_comm' style='margin:0;padding:0;color:red;'></div>
+                            <textarea class="form-control" cols=40 rows=2 name="commentaire_agent" id="commentaire_agent" max-size=255></textarea>
+							<p id="cptCaractere"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>	
             
-                                               <script>
-                                               function afficherSemainePrec(){
-                                               dateDebS = new Date();
-                                               dateFinS = new Date();
-                                               }
-                                               function afficherSemaineSuiv(){
-                                               dateDebS.setDate(dateDebS.getDate()+7);
-                                               dateFinS.setDate(dateFinS.getDate()+7);
-                                               }                                             
-                                               </script>
+
 {% endblock %}

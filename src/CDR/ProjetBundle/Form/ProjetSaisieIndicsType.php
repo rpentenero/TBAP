@@ -21,15 +21,7 @@ class ProjetSaisieIndicsType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('indic1_satisfactionClient', RangeType::class, array(
-    'attr' => array(
-        'min' => 0,
-        'max' => 100,
-		'id'  => 'ageInputId',
-		'value' => '24',
-		'oninput' => "ageOutputId.value = ageInputId.value",
-    )
-))
+                ->add('indic1_satisfactionClient', PercentType::class)
                 ->add('indic2_ratioCharges', PercentType::class)
                 ->add('indic3_tauxCouverture', PercentType::class)
                 ->add('indic4_tauxFSDeclassees', PercentType::class)
