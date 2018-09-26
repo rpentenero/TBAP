@@ -1,16 +1,18 @@
 {% extends "CDRProjetBundle::layout.html.twig" %}
 {% block projet_body %}
+{% for message in app.flashes ('notice') %}
 
-    {% if is_granted('ROLE_ADMIN') %} <a href="{{ path('cdr_projet_ajouter') }}"> <button type="button" class="btn btn-dark">Ajouter un projet </button> </a> {% endif %} <br>
-    {% for message in app.flashes ('notice') %}
-
-        <div class="flash">
-            {{ message }}
+        <div class="flash" style="background-color:#D8FABE; border:1px solid #2E6A00;" =>
+            <span style = "margin-left:5%;">{{ message }}</span>
         </div>
 
-    {% endfor %}
+{% endfor %}
 
-    <table class="table">
+<br>
+    {% if is_granted('ROLE_ADMIN') %} <a href="{{ path('cdr_projet_ajouter') }}"> <button type="button" class="btn btn-dark">Ajouter un projet </button> </a> {% endif %} <br>
+<br>    
+
+    <table class="table" id="dtBasicExample">
         <thead>
             <tr>
                 <th style="text-align: center">N°LDR</th>
@@ -54,6 +56,17 @@
 
     <br>
 
+	<script>
+	$(document).ready(function () {
+  $('#dtBasicExample').DataTable( {
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+        }
+    } );
+  $('.dataTables_length').addClass('bs-select');
+});
+
+	</script>
 
 {% endblock %}
 

@@ -121,7 +121,7 @@
                 var value = $(this).val();
                 $(this).data('previous', value);                
                 $('select').not(this).find('option[value="' + value + '"]').hide();
-                // Cas particulier du "Sélectionner un agent
+                // Cas particulier du "Sélectionner un agent"
                 $('select').not(this).find('option[value=""]').show();                 
 
             });

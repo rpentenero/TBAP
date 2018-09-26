@@ -31,7 +31,7 @@ class ProjetController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($projet);
             $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Le projet a bien été créée.');
+            $request->getSession()->getFlashBag()->add('notice', 'Le projet a bien été créé.');
             return $this->redirectToRoute('cdr_projet_homepage');
         }
 
@@ -53,7 +53,7 @@ class ProjetController extends Controller {
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
             $em->remove($projet);
             $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Le projet a bien été supprimée.');
+            $request->getSession()->getFlashBag()->add('notice', 'Le projet a bien été supprimé.');
             return $this->redirectToRoute('cdr_projet_homepage');
         }
         return $this->render('CDRProjetBundle:Projet:supprimer.html.twig', array(
@@ -91,9 +91,8 @@ class ProjetController extends Controller {
         }
         $form = $this->get('form.factory')->create(ProjetEditType::class, $projet);
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            // Inutile de persister ici, Doctrine connait déjà notre annonce
             $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Le projet a bien été modifiée.');
+            $request->getSession()->getFlashBag()->add('notice', 'Le projet a bien été modifié.');
             return $this->redirectToRoute('cdr_projet_consulter', ['id' => $projet->getId()]);
         }
         return $this->render('CDRProjetBundle:Projet:modifier.html.twig', array(
@@ -131,7 +130,7 @@ class ProjetController extends Controller {
             $projet->setIndic5NombreTests($form["indic5_nombreTests"]->getData());
             $projet->setIndic6NombreRelivraisons($form["indic6_nombreRelivraisons"]->getData());
             $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Le projet a bien été clôturée.');
+            $request->getSession()->getFlashBag()->add('notice', 'Le projet a bien été clôturé, et les indicateurs enregistrés.');
             return $this->redirectToRoute('cdr_projet_consulter', ['id' => $projet->getId()]);
         }
         return $this->render('CDRProjetBundle:Projet:cloturer.html.twig', array(
@@ -159,7 +158,7 @@ class ProjetController extends Controller {
             $projet->setIndic5NombreTests(null);
             $projet->setIndic6NombreRelivraisons(null);
             $em->flush();
-            $request->getSession()->getFlashBag()->add('notice', 'Le projet a bien été déclôturée.');
+            $request->getSession()->getFlashBag()->add('notice', 'Le projet a bien été déclôturé.');
             return $this->redirectToRoute('cdr_projet_consulter', ['id' => $projet->getId()]);
         }
         return $this->render('CDRProjetBundle:Projet:decloturer.html.twig', array(
@@ -187,6 +186,7 @@ class ProjetController extends Controller {
             $suivi->setFichier($fileName);
             $em->persist($suivi);
             $em->flush();
+			$request->getSession()->getFlashBag()->add('notice', 'Suivi enregistré.');
             return $this->redirectToRoute('cdr_projet_consulter', ['id' => $projet->getId()]);
         }
 
@@ -207,6 +207,7 @@ class ProjetController extends Controller {
         }
         $em->remove($suivi);
         $em->flush();
+		$request->getSession()->getFlashBag()->add('notice', 'Suivi supprimé.');
         return $this->redirectToRoute('cdr_projet_consulter', ['id' => $projet->getId()]);
     }
 

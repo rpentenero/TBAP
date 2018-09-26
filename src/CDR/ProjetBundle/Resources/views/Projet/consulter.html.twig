@@ -5,11 +5,13 @@
 
     {% for message in app.flashes ('notice') %}
 
-        <div class="flash">
-            {{ message }}
+        <div class="flash" style="background-color:#D8FABE; border:1px solid #2E6A00;" =>
+            <span style = "margin-left:5%;">{{ message }}</span>
         </div>
 
-    {% endfor %}
+{% endfor %}
+
+<br>
 
     <div class="col-md-20">
         <!-- Nav tabs --><div class="card">

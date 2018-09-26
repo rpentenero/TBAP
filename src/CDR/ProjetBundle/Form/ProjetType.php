@@ -36,45 +36,30 @@ class ProjetType extends AbstractType
                     'required' => false,
                     'choice_label' => 'PrenomEtNom',
                     'placeholder' => 'Sélectionner un agent',
-                    'query_builder' => function(UserRepository $repository) use($patternAgt) {
-                        return $repository->getAgt($patternAgt);
-                    }
                 ))
                 ->add('agent2', EntityType::class, array(
                     'class' => 'CDRUserBundle:User',
                     'required' => false,
                     'choice_label' => 'PrenomEtNom',
                     'placeholder' => 'Sélectionner un agent',
-                    'query_builder' => function(UserRepository $repository) use($patternAgt) {
-                        return $repository->getAgt($patternAgt);
-                    }
                 ))
                 ->add('agent3', EntityType::class, array(
                     'class' => 'CDRUserBundle:User',
                     'required' => false,
                     'choice_label' => 'PrenomEtNom',
                     'placeholder' => 'Sélectionner un agent',
-                    'query_builder' => function(UserRepository $repository) use($patternAgt) {
-                        return $repository->getAgt($patternAgt);
-                    }
                 ))
                 ->add('agent4', EntityType::class, array(
                     'class' => 'CDRUserBundle:User',
                     'required' => false,
                     'choice_label' => 'PrenomEtNom',
                     'placeholder' => 'Sélectionner un agent',
-                    'query_builder' => function(UserRepository $repository) use($patternAgt) {
-                        return $repository->getAgt($patternAgt);
-                    }
                 ))
                 ->add('agent5', EntityType::class, array(
                     'class' => 'CDRUserBundle:User',
                     'required' => false,
                     'choice_label' => 'PrenomEtNom',
                     'placeholder' => 'Sélectionner un agent',
-                    'query_builder' => function(UserRepository $repository) use($patternAgt) {
-                        return $repository->getAgt($patternAgt);
-                    }
                 ))
                 ->add('Enregistrer', SubmitType::class)
         ;
