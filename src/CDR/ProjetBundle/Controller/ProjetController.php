@@ -220,6 +220,19 @@ class ProjetController extends Controller {
                     'agents' => $agents
         ));
     }
+	
+	public function indicateursAction() {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Vous ne pouvez pas accéder à cette page.');
+        $em = $this->getDoctrine()->getManager();
+		$qb = $em->createQueryBuilder();
+		$projets = $qb->select(array('p'))
+		 ->from('CDRProjetBundle:Projet', 'p')
+		 ->where('p.termine = true')
+		 ->getQuery()
+		->getResult();
+        return $this->render('CDRProjetBundle:Projet:indicateurs.html.twig', array(
+                    'projets' => $projets));
+    }
 
     /**
      * @return string

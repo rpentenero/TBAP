@@ -1,0 +1,46 @@
+{% extends "CDRProjetBundle::layout.html.twig" %}
+{% block projet_body %}
+<br>    
+<br> 
+    <table class="table" id="projetsIndicstab">
+        <thead>
+            <tr>
+                <th style="text-align: center">N°LDR</th>
+                <th style="text-align: center;">Projet</th>
+                <th style="text-align: center;">Taux de satisfaction client (en %)</th>
+                <th style="text-align: center;">Ratio des charges (en %) : </th>
+                <th style="text-align: center;">Taux de couverture des tests (en %) : </th>
+				<th style="text-align: center;">Taux de FS déclassées (en %) : </th>
+				<th style="text-align: center;">Nombre de tests réalisés : </th>
+				<th style="text-align: center;">Nombre de relivraisons : </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for projet in projets %}
+				<tr class="projetter">
+                    <td style="text-align: center;"> {{ projet.numLdr }} </td>
+                    <td style="text-align: center;"> {{ projet.nom }} </td>
+                    <td style="text-align: center;"> {{ projet.Indic1SatisfactionClient*100 }} % </td>
+                    <td style="text-align: center;"> {{ projet.Indic2RatioCharges*100 }} % </td>
+                    <td style="text-align: center;"> {{ projet.Indic3TauxCouverture*100 }} % </td>
+					<td style="text-align: center;"> {{ projet.Indic4TauxFSDeclassees*100 }} %</td>
+                    <td style="text-align: center;"> {{ projet.Indic5NombreTests }} </td>
+                    <td style="text-align: center;"> {{ projet.Indic6NombreRelivraisons }}  </td> 
+                </tr>
+            {% endfor %}    
+        </tbody>
+    </table>
+
+<script>
+$(document).ready(function () {
+  $('#projetsIndicstab').DataTable( {
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+        }
+    } );
+  $('.dataTables_length').addClass('bs-select');
+});
+	</script>
+
+
+{% endblock %}

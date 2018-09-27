@@ -1,6 +1,6 @@
-<html>
+﻿<html>
     <head>
-        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>TBAP</title>
@@ -55,6 +55,7 @@
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="{{ path('cdr_projet_homepage') }}"><i class="glyphicon glyphicon-th-list"></i> Liste des projets</a></li>
                                         <li><a href="{{ path('cdr_projet_matrice')}}"><i class="glyphicon glyphicon-list-alt"></i> Matrice Projets-Agents</a></li>
+										{% if is_granted('ROLE_ADMIN') %}<li><a href="{{ path('cdr_projet_indicateur')}}"><i class="glyphicon glyphicon-ok"></i> Indicateurs </a></li> {% endif %}
                                     </ul>
                                 </li>
                                 {% if is_granted('ROLE_ADMIN') %}

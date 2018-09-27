@@ -54,6 +54,10 @@ cdr_projet_decloturer:
 cdr_projet_matrice:
     path:     /matrice
     defaults: { _controller: CDRProjetBundle:Projet:listerprojetsagents }
+         
+cdr_projet_indicateur:
+    path:     /indicateurs
+    defaults: { _controller: CDRProjetBundle:Projet:indicateurs }
     
 cdr_projet_planning:
     path:     /planning

@@ -43,7 +43,7 @@ var dateFinS2 =  new Date(date.setDate(date.getDate()-date.getDay()+5)).toLocale
                     <td> </td>
                     <td> </td>
                     <td> </td>
-                                                                              <td> </td>
+                    <td> </td>
                     <td> </td>
                     <td> </td>
                     <td> </td>
@@ -52,88 +52,78 @@ var dateFinS2 =  new Date(date.setDate(date.getDate()-date.getDay()+5)).toLocale
             {% endfor %}
         </tbody>
     </table>
+<script>	
+(function ($, window) {
+    $.fn.contextMenu = function (settings) {
+        return this.each(function () {
+            // Open context menu
+            $(this).on("contextmenu", function (e) {               
+                //open menu
+                var $menu = $(settings.menuSelector)
+                    .data("invokedOn", $(e.target))
+                    .show()
+                    .css({
+                        position: "absolute",
+						left: getMenuPosition(e.clientX, 'width', 'scrollLeft')-getXPosition(planning),
+                        top: getMenuPosition(e.clientY, 'height', 'scrollTop')-getYPosition(planning)
+                    })
+                    .off('click')
+                    .on('click', 'a', function (e) {
+                        $menu.hide();              
+                        var $invokedOn = $menu.data("invokedOn");
+                        var $selectedMenu = $(e.target);                        
+                        settings.menuSelected.call(this, $invokedOn, $selectedMenu);
+                    });                
+                return false;
+            });
 
-<script>
-$(document).on('click', "#planning>tbody>tr td", function (e) {			
-                alert("toto");
-				$("#dialog-form-activite").dialog("open");
+            //make sure menu closes on any click
+            $('body').click(function () {
+                $(settings.menuSelector).hide();
+            });
         });
-</script>	
-<div id="dialog-form-activite" title="Ajouter une activité" style='display:none'>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-5">
-                <div class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="liste_domaine" class="col-sm-4 control-label">Domaine</label>
-                        <div class="col-sm-8">
-                            <select id="liste_domaine" name="liste_domaine" class="form-control">
-                            </select>
-                        </div><p id='idMsgDailogBox' style='text-align:right;color:red'></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="liste_activite_nat" class="col-sm-4 control-label">Activité Nationale</label>
-                        <div class="col-sm-8">
-                            <select id='liste_activite_nat' name='liste_activite_nat' class="form-control"></select>
-                        </div>
-                    </div>					
-                    <div class="form-group">
-                        <label for="liste_activite" class="col-sm-4 control-label">Activité Locale</label>
-                        <div class="col-sm-8">
-                            <select id='liste_activite' name='liste_activite' class="form-control"></select>
-                        </div>
-                    </div>
-                    <div class="form-group" id="tr_projet">
-                        <label for="liste_projet" class="col-sm-4 control-label">Dossier</label>
-                        <div class="col-sm-8">
-                            <select name='liste_projet' id='liste_projet' class="form-control"></select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-7">
-                <div class="form-horizontal" role="form">
-                    <div class="form-group" id="date_debut_periode">
-                        <label for="datepicker1" class="col-sm-3 control-label">Date</label>
-                        <div class="col-sm-3">
-                            <input placeholder="jj-mm-aaaa" type='text' name='datepicker1' id='datepicker1' class='form-control'>
-                        </div>
-                        <label for="datepicker2" class="col-sm-3 control-label date_fin_periode"> au </label>
-                        <div class="col-sm-3 date_fin_periode">
-                            <input placeholder="jj-mm-aaaa" type='text' name='datepicker2' id='datepicker2' class='form-control'>
-                        </div>
+        
+        function getMenuPosition(mouse, direction, scrollDir) {
+			var win = $(window)[direction](),
+                scroll = $(window)[scrollDir](),
+                menu = $(settings.menuSelector)[direction](),
+                position = mouse + scroll;
+                        
+            // opening menu would pass the side of the page
+            if (mouse + menu > win && menu < mouse) 
+                position -= menu;  	
+            return position;
+        }
+		
+function getXPosition(element) {
+   var rect = element.getBoundingClientRect();
+   var x = rect.left;
+   return x;
+}
 
-                    </div>
+function getYPosition(element) {
+   var rect = element.getBoundingClientRect();
+   var y = rect.top;
+   return y;
+}			
+    };
+})(jQuery, window);
 
-                    <div class="form-group">
-                        <label for="input_time" class="col-sm-3 control-label">Durée</label>
-                        <div class="col-sm-3">
-                            <input placeholder="hh:mm" class="form-control" type="text" id="input_time"
-                                   name='input_time' value=""/>
-                            <div style="margin-top: 3px;" name="slider_time" id='slider_time'></div>
-                        </div>
-                        <label for="input_time" class="col-sm-3 control-label">Total jour</label>
-                        <div class="col-sm-3">
-                            <input class="form-control" type="text" id="input_total_time" name='input_total_time'
-                                   value="" readonly=readonly size=4/>
-                            <input type="hidden" id="hidden_total_time" name='hidden_total_time' value=0/>
-                            <input type="hidden" id="hidden_duree_activite" name='hidden_duree_activite' value=0/>
-                        </div>
-                    </div>
+$("#planning>tbody>tr td").contextMenu({
+    menuSelector: "#contextMenu",
+    menuSelected: function (invokedOn, selectedMenu) {
+        var msg = "You selected the menu item '" + selectedMenu.text() +
+            "' on the value '" + invokedOn.text() + "'";
+        alert(msg);
+    }
+});
+</script>    	
 
-                    <div class="form-group">
-                        <label for="commentaire_agent" class="col-sm-3 control-label">Commentaire</label>
-                        <div class="col-sm-9">
-                            <div id='msg_comm' style='margin:0;padding:0;color:red;'></div>
-                            <textarea class="form-control" cols=40 rows=2 name="commentaire_agent" id="commentaire_agent" max-size=255></textarea>
-							<p id="cptCaractere"></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>	
-            
+<ul id="contextMenu" class="dropdown-menu" role="menu" style="display:none" >
+    <li><a tabindex="-1" href="#" data-dismiss="modal">Ajouter une activitÃ©</a></li>
+    <li><a tabindex="-1" href="#">Modifier une activitÃ©</a></li>
+    <li><a tabindex="-1" href="#">Supprimer une activitÃ©</a></li>
+</ul>
+        
 
 {% endblock %}
