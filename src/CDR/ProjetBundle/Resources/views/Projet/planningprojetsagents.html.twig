@@ -11,6 +11,14 @@ var dateDebS2 =  new Date(date.setDate(date.getDate()-date.getDay()+8)).toLocale
 var dateFinS2 =  new Date(date.setDate(date.getDate()-date.getDay()+5)).toLocaleDateString();
 </script>
 
+
+Mes projets en cours  : 
+<ul>
+{% for monprojet in mesprojets %}
+<li> {{ monprojet.nom }} </li>
+ {% endfor %}
+</ul>
+
     <br>
     <table class="table table-bordered table-hover table-sortable" id="planning">
         <thead>

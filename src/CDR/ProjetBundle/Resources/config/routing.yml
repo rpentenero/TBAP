@@ -60,5 +60,7 @@ cdr_projet_indicateur:
     defaults: { _controller: CDRProjetBundle:Projet:indicateurs }
     
 cdr_projet_planning:
-    path:     /planning
+    path:     /planning/{id}
     defaults: { _controller: CDRProjetBundle:Projet:planning }
+    requirements:
+        id: \d+	

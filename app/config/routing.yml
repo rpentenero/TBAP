@@ -6,11 +6,11 @@ cdr_user:
 
 cdr_planning:
     resource: "@CDRPlanningBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /planning
 
 cdr_projet:
     resource: "@CDRProjetBundle/Resources/config/routing.yml"
-    prefix:   /projet
+    prefix:   /
     
 
     

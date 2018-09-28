@@ -25,7 +25,7 @@
             <!-- Logo -->
             <div class="row hidden-xs topper">
                 <div style="margin-left: 25%; margin-right: 25%;">
-                    <a href="{{ path('cdr_projet_planning') }}"><img am-TopLogo alt="logo"  src="{{ asset('img/TBAP_logo3.PNG') }}" class="img-responsive"></a>
+                    <a href="{{ path('cdr_projet_planning', {'id': app.user.id}) }}"><img am-TopLogo alt="logo"  src="{{ asset('img/TBAP_logo3.PNG') }}" class="img-responsive"></a>
                 </div>    
             </div>
             <br>    
@@ -46,7 +46,7 @@
 										{% if is_granted('ROLE_ADMIN') %}<li><a href="{{ path('cdr_projet_indicateur')}}"><i class="glyphicon glyphicon-ok"></i> Indicateurs </a></li> {% endif %}
                                     </ul>
                                 </li>
-                                <li><a href="{{ path('cdr_projet_planning') }}"><i class="glyphicon glyphicon-calendar"></i> Planning</a></li>
+                                <li><a href="{{ path('cdr_projet_planning', {'id': app.user.id}) }}"><i class="glyphicon glyphicon-calendar"></i> Planning</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-link"></i> Liens <b class="caret"></b></a>
                                     <ul class="dropdown-menu" role="menu">

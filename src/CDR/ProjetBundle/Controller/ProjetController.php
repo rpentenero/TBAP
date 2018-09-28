@@ -211,12 +211,21 @@ class ProjetController extends Controller {
         return $this->redirectToRoute('cdr_projet_consulter', ['id' => $projet->getId()]);
     }
 
-    public function planningAction() {
+    public function planningAction($id) {
         $em = $this->getDoctrine()->getManager();
         $projets = $em->getRepository("CDRProjetBundle:Projet")->findAll();
         $agents = $em->getRepository("CDRUserBundle:User")->findAll();
+		$qb = $em->createQueryBuilder();
+		$mesprojets = $qb->select(array('p'))
+		 ->from('CDRProjetBundle:Projet', 'p')
+		 ->where('p.termine = false')
+		 ->andWhere('p.referent = :id OR p.agent1 = :id OR p.agent2 = :id OR p.agent3 = :id OR p.agent4 = :id OR p.agent5 = :id')
+		 ->setParameter("id",$id)
+		 ->getQuery()
+		->getResult();
         return $this->render('CDRProjetBundle:Projet:planningprojetsagents.html.twig', array(
                     'projets' => $projets,
+					'mesprojets' => $mesprojets,
                     'agents' => $agents
         ));
     }
