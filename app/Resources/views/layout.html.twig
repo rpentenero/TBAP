@@ -38,6 +38,14 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse navbar-ex1-collapse" style="position:relative;">
                             <ul class="nav navbar-nav js-nav-add-active-class">
+								<li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-tasks"></i> Projets <b class="caret"></b></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ path('cdr_projet_homepage') }}"><i class="glyphicon glyphicon-th-list"></i> Liste des projets</a></li>
+                                        <li><a href="{{ path('cdr_projet_matrice')}}"><i class="glyphicon glyphicon-list-alt"></i> Matrice Projets-Agents</a></li>
+										{% if is_granted('ROLE_ADMIN') %}<li><a href="{{ path('cdr_projet_indicateur')}}"><i class="glyphicon glyphicon-ok"></i> Indicateurs </a></li> {% endif %}
+                                    </ul>
+                                </li>
                                 <li><a href="{{ path('cdr_projet_planning') }}"><i class="glyphicon glyphicon-calendar"></i> Planning</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-link"></i> Liens <b class="caret"></b></a>
@@ -49,15 +57,7 @@
 										<li> <a href="http://pilotage.recette.cnamts.fr/" target="_blank">OPERA </a></li>
 										<li> <a href="http://activites.recette.cnamts.fr/" target="_blank"> TITUS </a></li>
                                     </ul>
-                                </li>
-								<li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="glyphicon glyphicon-tasks"></i> Projets <b class="caret"></b></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{ path('cdr_projet_homepage') }}"><i class="glyphicon glyphicon-th-list"></i> Liste des projets</a></li>
-                                        <li><a href="{{ path('cdr_projet_matrice')}}"><i class="glyphicon glyphicon-list-alt"></i> Matrice Projets-Agents</a></li>
-										{% if is_granted('ROLE_ADMIN') %}<li><a href="{{ path('cdr_projet_indicateur')}}"><i class="glyphicon glyphicon-ok"></i> Indicateurs </a></li> {% endif %}
-                                    </ul>
-                                </li>
+                                </li>								
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <li class="dropdown">
                                         <a href="#"class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-lock"></i> Administration <b class="caret"></b></a>
